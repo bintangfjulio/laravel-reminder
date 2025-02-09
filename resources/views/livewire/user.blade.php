@@ -148,7 +148,7 @@
                         </div>
                         <select wire:model.blur="role" {{ $modalAction === 'lihat' ? 'disabled' : '' }}
                             class="select select-bordered select-md @error('role') border-red-500 @enderror">
-                            <option value="" disabled>Select Role</option>
+                            <option value="" disabled selected>Select Role</option>
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                         </select>

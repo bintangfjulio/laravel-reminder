@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lend extends Model
 {
     protected $table = 'lends';
-    protected $fillable = ['user_id', 'room_id', 'lend_start', 'lend_end'];
+    protected $fillable = ['user_id', 'room_id', 'lend_start', 'lend_end', 'status'];
 
     public function user()
     {
@@ -17,5 +17,16 @@ class Lend extends Model
     public function room()
     {
         return $this->belongsTo(Room::class);
+    }
+
+    const STATUSES = [
+        1 => 'Waiting',
+        2 => 'Booked',
+        3 => 'Rejected',
+    ];
+
+    public function getStatusLabelAttribute(): string
+    {
+        return self::STATUSES[$this->status] ?? '-';
     }
 }

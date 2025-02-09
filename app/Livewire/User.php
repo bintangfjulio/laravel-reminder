@@ -47,7 +47,7 @@ class User extends Component
             'confirmPassword' => $this->modalAction === 'edit'
                 ? ($this->password ? 'nullable|same:password' : 'nullable')
                 : 'required|same:password',
-            'role' => 'required',
+            'role' => 'required,in:user,admin',
         ];
     }
 
@@ -130,6 +130,6 @@ class User extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.user', compact('users'))->layout('components.layouts.app')->title('User');;
+        return view('livewire.user', compact('users'))->layout('components.layouts.app')->title('User');
     }
 }

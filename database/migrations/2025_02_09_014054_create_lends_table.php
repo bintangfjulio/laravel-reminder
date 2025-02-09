@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('room_id');
             $table->dateTime("lend_start");
             $table->dateTime("lend_end");
+            $table->integer("status");
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
