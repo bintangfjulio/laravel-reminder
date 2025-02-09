@@ -4,11 +4,15 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 
 class Login extends Component
 {
-    public string $email = '';
-    public string $password = '';
+    #[Validate('required|email')]
+    public $email = '';
+
+    #[Validate('required')]
+    public $password = '';
 
     protected $rules = [
         'email' => 'required|email',

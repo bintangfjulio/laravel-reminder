@@ -5,21 +5,21 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Validate;
 
 class Register extends Component
 {
+    #[Validate('required|min:3')]
     public $name = '';
-    public $email = '';
-    public $password = '';
-    public $confirmPassword = '';
-    public $defaultRole = 'user';
 
-    protected $rules = [
-        'name' => 'required|min:3',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:8',
-        'confirmPassword' => 'required|same:password',
-    ];
+    #[Validate('required|email|unique:users')]
+    public $email = '';
+
+    #[Validate('required|min:8')]
+    public $password = '';
+
+    #[Validate('required|same:password')]
+    public $confirmPassword = '';
 
     protected $messages = [
         'name.required' => 'Nama wajib diisi!',
@@ -42,7 +42,7 @@ class Register extends Component
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'role' => $this->defaultRole
+            'role' => 'user'
         ]);
 
         $this->js('Swal.fire({icon: "success", title: "Berhasil", text: "Daftar berhasil."})');

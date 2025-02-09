@@ -24,12 +24,9 @@ Route::middleware([
     'auth'
 ])->group(function () {
     Route::middleware('role:admin')->group(function () {
-        Route::get('/lend', Lend::class)->name('lend');
         Route::get('/room', Room::class)->name('room');
         Route::get('/user', User::class)->name('user');
     });
 
-    Route::middleware('role:user')->group(function () {
-        Route::get('/lend', Lend::class)->name('lend');
-    });
+    Route::get('/lend', Lend::class)->name('lend');
 });
