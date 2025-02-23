@@ -1,6 +1,6 @@
 <div>
     <form class="card-body" wire:submit.prevent="login">
-        <div wire:loading>
+        <div wire:loading wire:target='login'>
             <livewire:loading-spinner />
         </div>
 
