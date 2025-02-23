@@ -3,34 +3,22 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Validate;
+use App\Livewire\Forms\LoginForm;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
+#[Layout('components.layouts.auth')]
+#[Title('Masuk')]
 class Login extends Component
 {
-    #[Validate('required|email')]
-    public $email = '';
-    #[Validate('required')]
-    public $password = '';
-
-    protected $rules = [
-        'email' => 'required|email',
-        'password' => 'required'
-    ];
-
-    protected $messages = [
-        'email.required' => 'Email wajib diisi!',
-        'email.email' => 'Format email tidak valid!',
-        'password.required' => 'Password wajib diisi!',
-    ];
+    public LoginForm $form;
 
     public function login()
     {
-        $this->validate();
-
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
-            $this->js('Swal.fire({icon: "success", title: "Berhasil", text: "Login berhasil."})');
+        if ($this->form->auth()) {
             session()->regenerate();
+            $this->js('Swal.fire({icon: "success", title: "Berhasil", text: "Login berhasil."})');
+
             return $this->redirect("/lend", navigate: true);
         }
 
@@ -39,6 +27,6 @@ class Login extends Component
 
     public function render()
     {
-        return view('livewire.login')->layout('components.layouts.auth')->title('Masuk');
+        return view('livewire.login');
     }
 }

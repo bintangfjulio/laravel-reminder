@@ -3,6 +3,10 @@
 @endphp
 
 <div class="px-5 py-4">
+    <div wire:loading wire:target.except="resetModal">
+        <livewire:loading-spinner />
+    </div>
+
     <h1 class="font-bold text-2xl">List Lend</h1>
 
     <div class="flex justify-between my-6 items-end">
